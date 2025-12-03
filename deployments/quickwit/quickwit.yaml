@@ -1,3 +1,0 @@
-listen_addr: "0.0.0.0"
-rest_listen_addr: "0.0.0.0:7280"
-data_dir: "/quickwit/data"
