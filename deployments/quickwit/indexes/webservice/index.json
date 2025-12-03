@@ -1,0 +1,69 @@
+{
+  "version": "0.7",
+  "index_id": "api-logs",
+  "doc_mapping": {
+    "field_mappings": [
+      {
+        "name": "timestamp",
+        "type": "datetime",
+        "fast": true,
+        "stored": true
+      },
+      {
+        "name": "method",
+        "type": "text",
+        "stored": true,
+        "tokenizer": "raw"
+      },
+      {
+        "name": "path",
+        "type": "text",
+        "stored": true,
+        "tokenizer": "raw"
+      },
+      {
+        "name": "client_ip",
+        "type": "text",
+        "stored": true,
+        "tokenizer": "raw"
+      },
+      {
+        "name": "status_code",
+        "type": "i64",
+        "stored": true
+      },
+      {
+        "name": "latency_ms",
+        "type": "f64",
+        "stored": true
+      },
+      {
+        "name": "request_id",
+        "type": "text",
+        "stored": true,
+        "tokenizer": "raw"
+      },
+      {
+        "name": "request_body",
+        "type": "text",
+        "stored": true
+      },
+      {
+        "name": "response_body",
+        "type": "text",
+        "stored": true
+      }
+    ]
+  },
+  "indexing_settings": {
+    "commit_timeout_secs": 60
+  },
+  "search_settings": {
+    "default_search_fields": [
+      "path",
+      "method",
+      "request_body",
+      "response_body"
+    ]
+  }
+}
