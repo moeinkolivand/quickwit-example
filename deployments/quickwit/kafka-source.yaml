@@ -1,0 +1,16 @@
+version: 0.8
+source_id: api-logs-kafka
+source_type: kafka
+num_pipelines: 2
+params:
+  topic: api-logs
+  client_params:
+    bootstrap.servers: kafka1:19092,kafka2:19092,kafka3:19092
+    group.id: quickwit-indexer
+    auto.offset.reset: earliest
+    # These reduce polling/batch delays for faster ingestion:
+    fetch.message.max.bytes: 1000000          # Larger fetches, but tune if needed
+    fetch.min.bytes: 1                        # Fetch immediately (no wait for batch)
+    fetch.wait.max.ms: 10                     # Max 10ms wait per poll
+    queued.min.messages: 100                  # Smaller queue for quicker processing
+    queued.max.messages.kbytes: 1000          # Limit queue size to avoid backlog
