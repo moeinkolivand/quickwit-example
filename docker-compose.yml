@@ -26,23 +26,28 @@ services:
     ports:
       - "7280:7280"
       - "8081:8081"
+      - "7281:7281"
     volumes:
       - quickwit_data:/quickwit/data
       - ./deployments/quickwit/indexes:/quickwit/config/indexes
     command: [ "run" ]
     networks:
       - quickwit_network
+      - kafka-net
 
   quickwit-init:
     image: alpine:3.19
     depends_on:
       - quickwit
+      - kafka1
+      - kafka2
+      - kafka3
     volumes:
-      - ./deployments/quickwit/indexes:/quickwit/config/indexes
-      - ./deployments/quickwit/init-indexes.sh:/init-indexes.sh
-    entrypoint: [ "/bin/sh", "-c", "sleep 10 && /init-indexes.sh" ]
+      - ./deployments/quickwit:/quickwit/config
+    entrypoint: ["/bin/sh", "-c", "sleep 15 && /quickwit/config/init-quickwit.sh"]
     networks:
       - quickwit_network
+      - kafka-net
 
   kafka1:
     image: confluentinc/cp-kafka:7.8.0

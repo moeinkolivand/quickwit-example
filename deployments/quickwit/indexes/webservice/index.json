@@ -56,7 +56,8 @@
     ]
   },
   "indexing_settings": {
-    "commit_timeout_secs": 60
+    "commit_timeout_secs": 5,
+    "split_num_docs_target": 100000
   },
   "search_settings": {
     "default_search_fields": [
